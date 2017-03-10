@@ -15,7 +15,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        let rootNavigationController = UINavigationController(rootViewController: HomeViewController())
+        window?.rootViewController = rootNavigationController
+        
+        rootNavigationController.navigationBar.barTintColor = Color.menuBarTintColor
+        application.statusBarStyle = .lightContent
+        
+        //setup status bar
+//        application.statusBarStyle = .lightContent
+//        let statusBarBackgroundView = UIView()
+//        statusBarBackgroundView.backgroundColor = Color.statusBarBackgroundColor
+//        statusBarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+//        window?.addSubview(statusBarBackgroundView)
+//        //x,y,w,h
+//        statusBarBackgroundView.topAnchor.constraint(equalTo: (window?.topAnchor)!).isActive = true
+//        statusBarBackgroundView.leftAnchor.constraint(equalTo: (window?.leftAnchor)!).isActive = true
+//        statusBarBackgroundView.rightAnchor.constraint(equalTo: (window?.rightAnchor)!).isActive = true
+//        statusBarBackgroundView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+       
+        
         return true
     }
 
