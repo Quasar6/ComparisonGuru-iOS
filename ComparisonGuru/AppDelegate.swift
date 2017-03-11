@@ -21,7 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootNavigationController = UINavigationController(rootViewController: HomeViewController())
         window?.rootViewController = rootNavigationController
         
+        
         rootNavigationController.navigationBar.barTintColor = Color.menuBarTintColor
+        rootNavigationController.navigationBar.tintColor = .white
         application.statusBarStyle = .lightContent
         
         //setup status bar

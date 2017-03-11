@@ -19,8 +19,9 @@ class HomeViewController: UIViewController {
         return navBar
     }()
     
-    let searchField: SearchFieldView = {
+    lazy var searchField: SearchFieldView = {
         let sf = SearchFieldView()
+        sf.searchField.delegate = self
         sf.translatesAutoresizingMaskIntoConstraints = false
         return sf
     }()
@@ -53,7 +54,6 @@ class HomeViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationItem.titleView = navBarView
         setupViews()
-
         collectionView.register(FrequentSearchCell.self, forCellWithReuseIdentifier: cellId)
     }
     
@@ -65,16 +65,21 @@ class HomeViewController: UIViewController {
         
         view.addSubview(headerLabel)
         //x,y,w,h
-        headerLabel.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 30).isActive = true
+        headerLabel.topAnchor.constraint(equalTo: searchField.bottomAnchor, constant: 40).isActive = true
         headerLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
         headerLabel.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
         view.addSubview(collectionView)
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
-        collectionView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 8).isActive = true
+        collectionView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 4).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 300).isActive = true
 //        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+    
+    func handleSearched() {
+        let resultController = ResultListController()
+        navigationController?.pushViewController(resultController, animated: true)
     }
 
 
@@ -99,5 +104,21 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("you did selected \(indexPath.item) item")
+    }
 }
 
+extension HomeViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        handleSearched()
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        searchField.endEditing(true)
+    }
+}
