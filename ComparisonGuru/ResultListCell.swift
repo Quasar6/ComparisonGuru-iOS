@@ -12,7 +12,7 @@ class ResultListCell: UITableViewCell {
 
     let productImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "googlepixel")
+        imageView.image = #imageLiteral(resourceName: "default_image")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView

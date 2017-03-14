@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import TRON
+import SwiftyJSON
 
 class HomeViewController: UIViewController {
 
@@ -74,12 +76,27 @@ class HomeViewController: UIViewController {
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
         collectionView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 4).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-//        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-    func handleSearched() {
-        let resultController = ResultListController()
-        navigationController?.pushViewController(resultController, animated: true)
+    func handleSearched(text: String) {
+        
+        Service.sharedInstance.fetchHomeFeed(productName: text) { (homeDatasource, err) in
+            if let _ = err {
+                if let apiError = err as? APIError<Service.JSONError> {
+                    if apiError.response?.statusCode != 200 {
+                        print(apiError.response?.statusCode ?? "not found status code")
+                    }
+                }
+                return
+            }
+            let resultController = ResultListController()
+            guard let products = homeDatasource?.products else {return}
+            resultController.products = products
+            self.navigationController?.pushViewController(resultController, animated: true)
+            
+        }
+        
+        
     }
 
 
@@ -113,7 +130,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 extension HomeViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        handleSearched()
+        let text = textField.text ?? ""
+        if text != "" {
+            handleSearched(text: text)
+            print(text)
+        }
         textField.resignFirstResponder()
         return true
     }

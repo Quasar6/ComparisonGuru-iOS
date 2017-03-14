@@ -9,13 +9,15 @@
 import UIKit
 
 class ResultListController: UITableViewController {
-
+    let cellId = "resultListCell"
+    var products = [Product]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        tableView.register(ResultListCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        tableView.register(ResultListCell.self, forCellReuseIdentifier: cellId)
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }
 
@@ -23,14 +25,24 @@ class ResultListController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 15
+        return products.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) as! ResultListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ResultListCell
 
-        // Configure the cell...
+        let product = products[indexPath.row]
+        cell.productImageView.loadImageUsingUrlString(urlString: product.imageUrl)
+        
+        cell.productName.text = product.name
+        
+        var price = products[indexPath.row].price
+        if price == 0 {
+            price = products[indexPath.row].salePrice
+        }
+            cell.priceLabel.text = "\(product.currency)  \(price)"
+        
 
         return cell
     }
