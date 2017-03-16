@@ -42,6 +42,21 @@ class MenuBarView: UIView {
         setupHorizontalBar()
     }
     
+    var tappedAction: ((_ mIndex:Int) -> Void)?
+    
+    func scrollToMenuIndex(menuIndex: Int){
+        let indexPath = IndexPath(item: menuIndex, section: 0)
+//        collectionView.scrollToItem(at: indexPath, at: [], animated: true)
+        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                let x = CGFloat(menuIndex) * frame.width / 3
+                horizongtalBarLeftConstrain?.constant = x
+        
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                    self.layoutIfNeeded()
+                }, completion: nil)
+        tappedAction?(menuIndex)
+    }
+    
     var horizongtalBarLeftConstrain: NSLayoutConstraint?
     
     func setupHorizontalBar() {
@@ -87,16 +102,22 @@ extension MenuBarView: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let x = CGFloat(indexPath.item) * frame.width / 3
-        horizongtalBarLeftConstrain?.constant = x
         
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
-            self.layoutIfNeeded()
-        }, completion: nil)
+        scrollToMenuIndex(menuIndex: indexPath.item)
+//        let x = CGFloat(indexPath.item) * frame.width / 3
+//        horizongtalBarLeftConstrain?.constant = x
+//        
+//        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
+//            self.layoutIfNeeded()
+//        }, completion: nil)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         horizongtalBarLeftConstrain?.constant = scrollView.contentOffset.x / 4
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("end of decelerating")
     }
     
 }

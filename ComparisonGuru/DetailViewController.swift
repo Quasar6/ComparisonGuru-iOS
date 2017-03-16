@@ -10,40 +10,46 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    let menuBarView: MenuBarView = {
+    lazy var subDetailPageView: SubDetailPageViewController = {
+        let vc = SubDetailPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        self.addViewControllerAsChildViewController(childViewController:vc)
+        vc.pageSwiped = {(index) in
+            self.changeTopMenuBarPosition(index:index)
+        }
+        return vc
+    }()
+    
+    func changeTopMenuBarPosition(index:Int) {
+        menuBarView.scrollToMenuIndex(menuIndex: index)
+    }
+    
+    lazy var menuBarView: MenuBarView = {
         let menuBar = MenuBarView()
         menuBar.translatesAutoresizingMaskIntoConstraints = false
+        menuBar.tappedAction = {(index) in
+            self.changeCurrentPageView(index:index)
+        }
         return menuBar
     }()
     
-    var scrollView: UIScrollView!
+    var preIndex:Int = 0
+    func changeCurrentPageView(index:Int) {
+        let direction = index > preIndex ? UIPageViewControllerNavigationDirection.forward : UIPageViewControllerNavigationDirection.reverse
+        subDetailPageView.setViewControllers([subDetailPageView.orderedViewControllers[index]], direction: direction, animated: true) { (ok) in
+            if ok {
+                self.preIndex = index
+            }
+        }
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
-        setupScrollView()
+        
         setupMenuBar()
-    }
-    
-    func setupScrollView() {
-        scrollView = UIScrollView(frame: view.frame)
-        scrollView.backgroundColor = .orange
-        scrollView.contentSize = CGSize(width: view.bounds.width * 3, height: view.bounds.height)
-        scrollView.isPagingEnabled = true
-        view.addSubview(scrollView)
-        
-        let view1 = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        view1.backgroundColor = .red
-        
-        let view2 = UIView(frame: CGRect(x: scrollView.frame.width, y: 0, width: view.frame.width, height: view.frame.height))
-        view1.backgroundColor = .blue
-        
-//        let view3 = UIView(frame: CGRect(x: scrollView.frame.width * 2, y: 0, width: view.frame.width, height: view.frame.height))
-//        view1.backgroundColor = .green
-        
-        scrollView.addSubview(view1)
-        scrollView.addSubview(view2)
-//        scrollView.addSubview(view3)
+        setupSubviews()
     }
     
     func setupMenuBar(){
@@ -53,9 +59,37 @@ class DetailViewController: UIViewController {
         menuBarView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         menuBarView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
+    
+    
 }
+    // MARK: - deal with subview controllers
+extension DetailViewController {
+    
+    fileprivate func setupSubviews() {
+        subDetailPageView.view.isHidden = false
+    }
+    
+    
+    fileprivate func addViewControllerAsChildViewController(childViewController: UIViewController) {
+        addChildViewController(childViewController)
+        
+        view.addSubview(childViewController.view)
+        
+        childViewController.view.anchor(menuBarView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 4, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//        childViewController.view.frame = view.bounds
+//        childViewController.view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+        
+        childViewController.didMove(toParentViewController: self)
+    }
+    
+    // MARK: - remove childviewController
+    fileprivate func removeViewControllerAsChildViewController(childViewController: UIViewController) {
+        childViewController.willMove(toParentViewController: nil)
+        
+        childViewController.view.removeFromSuperview()
+        childViewController.removeFromParentViewController()
+    }
+    
+    
 
-extension DetailViewController: UICollectionViewDelegate {
-    
-    
 }
