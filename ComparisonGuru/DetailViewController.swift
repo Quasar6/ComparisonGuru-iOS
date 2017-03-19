@@ -10,11 +10,17 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    var something:Product? {
+        didSet{
+            print(self.something?.category ?? "")
+        }
+    }
+    
     lazy var subDetailPageView: SubDetailPageViewController = {
         let vc = SubDetailPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         self.addViewControllerAsChildViewController(childViewController:vc)
-        vc.pageSwiped = {(index) in
-            self.changeTopMenuBarPosition(index:index)
+        vc.pageSwiped = {[weak self](index) in
+            self?.changeTopMenuBarPosition(index:index)
         }
         return vc
     }()
@@ -26,8 +32,8 @@ class DetailViewController: UIViewController {
     lazy var menuBarView: MenuBarView = {
         let menuBar = MenuBarView()
         menuBar.translatesAutoresizingMaskIntoConstraints = false
-        menuBar.tappedAction = {(index) in
-            self.changeCurrentPageView(index:index)
+        menuBar.tappedAction = {[weak self](index) in
+            self?.changeCurrentPageView(index:index)
         }
         return menuBar
     }()
@@ -42,6 +48,9 @@ class DetailViewController: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     
     override func viewDidLoad() {
@@ -50,6 +59,9 @@ class DetailViewController: UIViewController {
         
         setupMenuBar()
         setupSubviews()
+        
+        view.backgroundColor = .white
+        
     }
     
     func setupMenuBar(){
@@ -75,9 +87,7 @@ extension DetailViewController {
         
         view.addSubview(childViewController.view)
         
-        childViewController.view.anchor(menuBarView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 4, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-//        childViewController.view.frame = view.bounds
-//        childViewController.view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
+        childViewController.view.anchor(menuBarView.bottomAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         childViewController.didMove(toParentViewController: self)
     }

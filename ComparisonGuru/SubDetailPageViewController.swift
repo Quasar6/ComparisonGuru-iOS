@@ -12,23 +12,10 @@ class SubDetailPageViewController: UIPageViewController {
 
     var pageSwiped:((_ index:Int) -> Void)?
     
-    lazy var firstViewController: UIViewController = {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .green
-        let button = UIButton(type: .system)
-        button.frame = CGRect(x: 0, y: 0, width: 80, height: 40)
-        button.setTitle("Click me", for: .normal)
-        button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
-        vc.view.addSubview(button)
-        
-        return vc
+    let myView:OverViewViewController = {
+        let view = OverViewViewController()
+        return view
     }()
-    
-    func buttonClicked(){
-        print("I'm Clicked")
-        setViewControllers([secondViewController], direction: .forward, animated: true, completion: nil)
-    }
-    
     
     lazy var secondViewController: UIViewController = {
         let vc = UIViewController()
@@ -43,11 +30,14 @@ class SubDetailPageViewController: UIPageViewController {
     }()
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [self.firstViewController, self.secondViewController, self.thirdViewController]
+        return [self.myView, self.secondViewController, self.thirdViewController]
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource = nil
+        
+        view.backgroundColor = UIColor(r: 230, g: 230, b: 230)
+        
         dataSource = self
         delegate = self
         if let firstViewController = orderedViewControllers.first {
@@ -55,9 +45,6 @@ class SubDetailPageViewController: UIPageViewController {
         }
         
     }
-    
-    
-
 }
 
 extension SubDetailPageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
@@ -97,9 +84,6 @@ extension SubDetailPageViewController: UIPageViewControllerDataSource, UIPageVie
         pageSwiped?(currentIndex)
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        
-    }
 }
 
 

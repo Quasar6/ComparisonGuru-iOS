@@ -12,6 +12,7 @@ struct Color {
     static let menuBarTintColor = UIColor(r: 213, g: 3, b: 0)
     static let statusBarBackgroundColor = UIColor(r: 213, g: 3, b: 0)
     static let searchFieldBorderColor = UIColor(r: 3, g: 184, b: 250)
+    static let separatorColor = UIColor(r: 220, g: 220, b: 220)
 }
 
 struct Font {

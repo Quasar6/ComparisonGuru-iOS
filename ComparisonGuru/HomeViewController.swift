@@ -40,17 +40,32 @@ class HomeViewController: UIViewController {
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
+        
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.backgroundColor = .white
+        cv.showsHorizontalScrollIndicator = false
 //        cv.isPagingEnabled = true
         cv.dataSource = self
         cv.delegate = self
         return cv
     }()
     
+    lazy var loadingView: LoadingView = {
+        let view = LoadingView()
+        view.backgroundColor = .lightGray
+        view.isHidden = true
+        return view
+    }()
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        return UIStatusBarStyle.lightContent
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
+//        setNeedsStatusBarAppearanceUpdate()
+//        self.modalPresentationCapturesStatusBarAppearance = true
+//        self.navigationController?.navigationBar.barStyle = .black
+        
         view.backgroundColor = .white
         collectionView.layer.masksToBounds = false
         navigationController?.navigationBar.isTranslucent = false
@@ -76,6 +91,12 @@ class HomeViewController: UIViewController {
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8).isActive = true
         collectionView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 4).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        
+        view.addSubview(loadingView)
+        loadingView.anchorCenterSuperview()
+        loadingView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        loadingView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        
     }
     
     func handleSearched(text: String) {
@@ -89,6 +110,7 @@ class HomeViewController: UIViewController {
                 }
                 return
             }
+            self.loadingView.isHidden = true
             let resultController = ResultListController()
             guard let products = homeDatasource?.products else {return}
             resultController.products = products
@@ -132,6 +154,7 @@ extension HomeViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let text = textField.text ?? ""
         if text != "" {
+            loadingView.isHidden = false
             handleSearched(text: text)
             print(text)
         }

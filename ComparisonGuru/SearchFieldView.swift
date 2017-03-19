@@ -20,6 +20,7 @@ class SearchFieldView: UIView {
         sf.layer.cornerRadius = 10
         sf.layer.masksToBounds = true
         sf.rightViewMode = .always
+        sf.returnKeyType = .go
         return sf
     }()
     

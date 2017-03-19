@@ -14,13 +14,29 @@ class ResultListController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        
+        navigationController?.hidesBarsOnSwipe = true
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         tableView.register(ResultListCell.self, forCellReuseIdentifier: cellId)
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+        
     }
 
+    func whiteStatusBarBackground(){
+        let whiteView = UIView()
+        whiteView.backgroundColor = .white
+        view.addSubview(whiteView)
+        whiteView.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return navigationController?.isNavigationBarHidden ?? false
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,12 +73,18 @@ class ResultListController: UITableViewController {
         return view
     }
     
+    
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
-        navigationController?.pushViewController(detailViewController, animated: true)
+        present(detailViewController, animated: true) {
+            detailViewController.something = self.products[indexPath.row]
+            print("passed product")
+        }
+//        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

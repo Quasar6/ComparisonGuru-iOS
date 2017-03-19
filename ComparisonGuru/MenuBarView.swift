@@ -27,6 +27,7 @@ class MenuBarView: UIView {
         super.init(frame: frame)
         setupMenuBarCollectionView()
         
+        self.addShadow()
     }
     
     func setupMenuBarCollectionView() {

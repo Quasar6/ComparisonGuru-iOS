@@ -13,18 +13,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        let rootNavigationController = UINavigationController(rootViewController: HomeViewController()) //DetailViewController()
+//        let rootNavigationController = UINavigationController(rootViewController: DetailViewController())
+        let rootNavigationController = UINavigationController(rootViewController: HomeViewController())
+        
         window?.rootViewController = rootNavigationController
         
         
         rootNavigationController.navigationBar.barTintColor = Color.menuBarTintColor
         rootNavigationController.navigationBar.tintColor = .white
-        application.statusBarStyle = .lightContent
+        rootNavigationController.navigationBar.barStyle = .black
+        // uncomment, when viewcontroller-based status appearance turns NO
+        //        application.statusBarStyle = .lightContent
+        
         
         //setup status bar
 //        application.statusBarStyle = .lightContent
