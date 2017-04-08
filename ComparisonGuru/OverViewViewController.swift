@@ -12,7 +12,14 @@ class OverViewViewController: UIViewController {
 
     let cellId = "cellId"
     
-    var product:Product?
+    var product:Product?{
+        didSet{
+//            overView.productNameLabel.text = product!.name
+            overView.product = product
+            
+        }
+    }
+    
     var collectionView:UICollectionView!
     
     lazy var overView:OverViewView = {

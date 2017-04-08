@@ -19,8 +19,8 @@ class NavBarView: UIView {
     let iconImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFill
-        iv.image = #imageLiteral(resourceName: "newlogo")
+        iv.contentMode = .scaleAspectFit
+        iv.image = #imageLiteral(resourceName: "logolow")
         return iv
     }()
     
@@ -46,7 +46,7 @@ class NavBarView: UIView {
         //x,y,w,h
         iconImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor).isActive = true
         iconImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-        iconImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        iconImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
         iconImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         containerView.addSubview(nameLabel)

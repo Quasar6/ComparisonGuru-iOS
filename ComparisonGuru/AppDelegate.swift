@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
 
@@ -17,9 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+/*
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-//        let rootNavigationController = UINavigationController(rootViewController: DetailViewController())
+
         let rootNavigationController = UINavigationController(rootViewController: HomeViewController())
         
         window?.rootViewController = rootNavigationController
@@ -28,23 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         rootNavigationController.navigationBar.barTintColor = Color.menuBarTintColor
         rootNavigationController.navigationBar.tintColor = .white
         rootNavigationController.navigationBar.barStyle = .black
+*/ 
+        
         // uncomment, when viewcontroller-based status appearance turns NO
         //        application.statusBarStyle = .lightContent
         
         
-        //setup status bar
-//        application.statusBarStyle = .lightContent
-//        let statusBarBackgroundView = UIView()
-//        statusBarBackgroundView.backgroundColor = Color.statusBarBackgroundColor
-//        statusBarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-//        window?.addSubview(statusBarBackgroundView)
-//        //x,y,w,h
-//        statusBarBackgroundView.topAnchor.constraint(equalTo: (window?.topAnchor)!).isActive = true
-//        statusBarBackgroundView.leftAnchor.constraint(equalTo: (window?.leftAnchor)!).isActive = true
-//        statusBarBackgroundView.rightAnchor.constraint(equalTo: (window?.rightAnchor)!).isActive = true
-//        statusBarBackgroundView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-       
-        
+        FIRApp.configure()
+        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+        GIDSignIn.sharedInstance().delegate = self
         return true
     }
 
@@ -69,7 +64,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    @available(iOS 9.0, *)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
+                                                 sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                 annotation: [:])
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
+                                                 sourceApplication: sourceApplication,
+                                                 annotation: annotation)
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            print("sign func error \(error)")
+            return
+        }
+        
+        guard let authentication = user.authentication else { return }
+        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                          accessToken: authentication.accessToken)
+        // sign in Firebase using the credential
+        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+            if let _ = error{
+                return
+            }
+        })
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        // Perform any operations when the user disconnects from app here.
+        // ...
+    }
 
 }
 

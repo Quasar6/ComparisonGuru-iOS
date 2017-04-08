@@ -72,7 +72,7 @@ class ResultListCell: UITableViewCell {
         storeImage.leftAnchor.constraint(equalTo: productName.leftAnchor).isActive = true
         storeImage.topAnchor.constraint(equalTo: productName.bottomAnchor, constant: 2).isActive = true
         storeImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        storeImage.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        storeImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         //x,y,w,h
         priceLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8).isActive = true

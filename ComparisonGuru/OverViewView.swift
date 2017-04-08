@@ -83,6 +83,23 @@ class OverViewView: UIView {
         return collection
     }()
     
+    var product:Product?{
+        didSet{
+            updateProduct()
+        }
+    }
+    
+    private func updateProduct() {
+        guard let product = self.product else {return}
+        productNameLabel.text = product.name
+        var price = product.salePrice
+        if price == 0 {
+            price = product.price
+        }
+        priceTagLabel.text = "\(product.currency) \(price)"
+        imageView.loadImageUsingUrlString(urlString: product.imageUrl)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()

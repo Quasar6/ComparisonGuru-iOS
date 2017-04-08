@@ -10,6 +10,7 @@
 		10C759F44AF04220C319CF73 /* Pods_ComparisonGuruTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C45965F962D992C0B68FD07 /* Pods_ComparisonGuruTests.framework */; };
 		3E2D9D0F1E7AF7EF00899B30 /* OverViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2D9D0E1E7AF7EF00899B30 /* OverViewViewController.swift */; };
 		3E2D9D121E7C7DDB00899B30 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2D9D111E7C7DDB00899B30 /* LoadingView.swift */; };
+		3E3611191E8AFB7000B4EAD8 /* SpeechRecognitionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3611181E8AFB7000B4EAD8 /* SpeechRecognitionViewController.swift */; };
 		3E362CF81E79ADE600B467A7 /* SubDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E362CF71E79ADE600B467A7 /* SubDetailPageViewController.swift */; };
 		3E40671A1E711F9E004C8EEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4067191E711F9E004C8EEB /* AppDelegate.swift */; };
 		3E40671C1E711F9E004C8EEB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E40671B1E711F9E004C8EEB /* HomeViewController.swift */; };
@@ -24,14 +25,21 @@
 		3E4067491E71C725004C8EEB /* FrequentSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4067481E71C725004C8EEB /* FrequentSearchCell.swift */; };
 		3E4A4F0E1E736C56005F5B9D /* ResultListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A4F0D1E736C56005F5B9D /* ResultListController.swift */; };
 		3E4A4F101E738189005F5B9D /* ResultListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A4F0F1E738189005F5B9D /* ResultListCell.swift */; };
-		3E4A4F131E73BE15005F5B9D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A4F121E73BE15005F5B9D /* Product.swift */; };
 		3E4A4F161E73C53F005F5B9D /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A4F151E73C53F005F5B9D /* Service.swift */; };
 		3E4A4F181E76D151005F5B9D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A4F171E76D151005F5B9D /* DetailViewController.swift */; };
 		3E4A4F1B1E76DD97005F5B9D /* OverViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A4F1A1E76DD97005F5B9D /* OverViewView.swift */; };
 		3E4A4F1D1E76E3B9005F5B9D /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A4F1C1E76E3B9005F5B9D /* MenuBarView.swift */; };
 		3E4A4F1F1E76F643005F5B9D /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4A4F1E1E76F643005F5B9D /* MenuCell.swift */; };
+		3E65C0A61E91D287000DEC81 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3E65C0A51E91D287000DEC81 /* GoogleService-Info.plist */; };
+		3E65C0A81E91EAFB000DEC81 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E65C0A71E91EAFB000DEC81 /* RatingControl.swift */; };
 		3E8957AC1E7DCEF80097D3BF /* OtherProductsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8957AB1E7DCEF80097D3BF /* OtherProductsCell.swift */; };
 		3E8957AE1E7DD1C50097D3BF /* AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8957AD1E7DD1C50097D3BF /* AddShadow.swift */; };
+		3E979D4B1E934FAF007BE7C6 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E979D4A1E934FAF007BE7C6 /* ReviewViewController.swift */; };
+		3E979D4D1E9416FA007BE7C6 /* ReviewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E979D4C1E9416FA007BE7C6 /* ReviewTableCell.swift */; };
+		3E979D531E943EDF007BE7C6 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E979D521E943EDF007BE7C6 /* Product.swift */; };
+		3E979D561E968071007BE7C6 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E979D551E968071007BE7C6 /* HomePageViewController.swift */; };
+		3E979D581E96CF5A007BE7C6 /* HomePageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E979D571E96CF5A007BE7C6 /* HomePageViewCell.swift */; };
+		3E979D5A1E994A88007BE7C6 /* DetailPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E979D591E994A88007BE7C6 /* DetailPage.storyboard */; };
 		EC13A482C25DB6636AAAA9E0 /* Pods_ComparisonGuru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 963BD7117DA808BDE5DBB676 /* Pods_ComparisonGuru.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +58,7 @@
 		1C45965F962D992C0B68FD07 /* Pods_ComparisonGuruTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComparisonGuruTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E2D9D0E1E7AF7EF00899B30 /* OverViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverViewViewController.swift; sourceTree = "<group>"; };
 		3E2D9D111E7C7DDB00899B30 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		3E3611181E8AFB7000B4EAD8 /* SpeechRecognitionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognitionViewController.swift; sourceTree = "<group>"; };
 		3E362CF71E79ADE600B467A7 /* SubDetailPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubDetailPageViewController.swift; sourceTree = "<group>"; };
 		3E4067161E711F9E004C8EEB /* ComparisonGuru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComparisonGuru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E4067191E711F9E004C8EEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,14 +77,21 @@
 		3E4067481E71C725004C8EEB /* FrequentSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequentSearchCell.swift; sourceTree = "<group>"; };
 		3E4A4F0D1E736C56005F5B9D /* ResultListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultListController.swift; sourceTree = "<group>"; };
 		3E4A4F0F1E738189005F5B9D /* ResultListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultListCell.swift; sourceTree = "<group>"; };
-		3E4A4F121E73BE15005F5B9D /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		3E4A4F151E73C53F005F5B9D /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		3E4A4F171E76D151005F5B9D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3E4A4F1A1E76DD97005F5B9D /* OverViewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverViewView.swift; sourceTree = "<group>"; };
 		3E4A4F1C1E76E3B9005F5B9D /* MenuBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		3E4A4F1E1E76F643005F5B9D /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		3E65C0A51E91D287000DEC81 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3E65C0A71E91EAFB000DEC81 /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		3E8957AB1E7DCEF80097D3BF /* OtherProductsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherProductsCell.swift; sourceTree = "<group>"; };
 		3E8957AD1E7DD1C50097D3BF /* AddShadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddShadow.swift; sourceTree = "<group>"; };
+		3E979D4A1E934FAF007BE7C6 /* ReviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		3E979D4C1E9416FA007BE7C6 /* ReviewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTableCell.swift; sourceTree = "<group>"; };
+		3E979D521E943EDF007BE7C6 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		3E979D551E968071007BE7C6 /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		3E979D571E96CF5A007BE7C6 /* HomePageViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewCell.swift; sourceTree = "<group>"; };
+		3E979D591E994A88007BE7C6 /* DetailPage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailPage.storyboard; sourceTree = "<group>"; };
 		41DDADA871EA03298DA23125 /* Pods-ComparisonGuruTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComparisonGuruTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComparisonGuruTests/Pods-ComparisonGuruTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A377C1F11B01470BDA12AAA /* Pods-ComparisonGuru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComparisonGuru.release.xcconfig"; path = "Pods/Target Support Files/Pods-ComparisonGuru/Pods-ComparisonGuru.release.xcconfig"; sourceTree = "<group>"; };
 		963BD7117DA808BDE5DBB676 /* Pods_ComparisonGuru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComparisonGuru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,11 +121,22 @@
 		3E2D9D101E7AF95700899B30 /* DetailViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3E979D4A1E934FAF007BE7C6 /* ReviewViewController.swift */,
+				3E979D4C1E9416FA007BE7C6 /* ReviewTableCell.swift */,
 				3E4A4F171E76D151005F5B9D /* DetailViewController.swift */,
 				3E362CF71E79ADE600B467A7 /* SubDetailPageViewController.swift */,
 				3E2D9D0E1E7AF7EF00899B30 /* OverViewViewController.swift */,
 			);
 			name = DetailViewController;
+			sourceTree = "<group>";
+		};
+		3E36111A1E8B096A00B4EAD8 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				3E40671B1E711F9E004C8EEB /* HomeViewController.swift */,
+				3E3611181E8AFB7000B4EAD8 /* SpeechRecognitionViewController.swift */,
+			);
+			name = HomePage;
 			sourceTree = "<group>";
 		};
 		3E40670D1E711F9E004C8EEB = {
@@ -142,9 +169,12 @@
 				3E40673F1E719714004C8EEB /* Controller */,
 				3E4067191E711F9E004C8EEB /* AppDelegate.swift */,
 				3E40671D1E711F9E004C8EEB /* Main.storyboard */,
+				3E979D591E994A88007BE7C6 /* DetailPage.storyboard */,
 				3E4067201E711F9E004C8EEB /* Assets.xcassets */,
 				3E4067221E711F9E004C8EEB /* LaunchScreen.storyboard */,
 				3E4067251E711F9E004C8EEB /* Info.plist */,
+				3E65C0A51E91D287000DEC81 /* GoogleService-Info.plist */,
+				3E65C0A71E91EAFB000DEC81 /* RatingControl.swift */,
 			);
 			path = ComparisonGuru;
 			sourceTree = "<group>";
@@ -171,7 +201,7 @@
 		3E40673E1E71970A004C8EEB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3E4A4F121E73BE15005F5B9D /* Product.swift */,
+				3E979D521E943EDF007BE7C6 /* Product.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -179,8 +209,9 @@
 		3E40673F1E719714004C8EEB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3E979D541E968033007BE7C6 /* InitialPage */,
 				3E2D9D101E7AF95700899B30 /* DetailViewController */,
-				3E40671B1E711F9E004C8EEB /* HomeViewController.swift */,
+				3E36111A1E8B096A00B4EAD8 /* HomePage */,
 				3E4A4F0D1E736C56005F5B9D /* ResultListController.swift */,
 			);
 			name = Controller;
@@ -232,6 +263,15 @@
 				3E8957AB1E7DCEF80097D3BF /* OtherProductsCell.swift */,
 			);
 			name = DetailPage;
+			sourceTree = "<group>";
+		};
+		3E979D541E968033007BE7C6 /* InitialPage */ = {
+			isa = PBXGroup;
+			children = (
+				3E979D551E968071007BE7C6 /* HomePageViewController.swift */,
+				3E979D571E96CF5A007BE7C6 /* HomePageViewCell.swift */,
+			);
+			name = InitialPage;
 			sourceTree = "<group>";
 		};
 		432017A0F4EF831B8041BC05 /* Pods */ = {
@@ -346,6 +386,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E4067241E711F9E004C8EEB /* LaunchScreen.storyboard in Resources */,
+				3E979D5A1E994A88007BE7C6 /* DetailPage.storyboard in Resources */,
+				3E65C0A61E91D287000DEC81 /* GoogleService-Info.plist in Resources */,
 				3E4067211E711F9E004C8EEB /* Assets.xcassets in Resources */,
 				3E40671F1E711F9E004C8EEB /* Main.storyboard in Resources */,
 			);
@@ -373,7 +415,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4991848490ED6899E25A8B23 /* [CP] Copy Pods Resources */ = {
@@ -403,7 +445,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C6E1DD8A7213D02413CB3049 /* [CP] Embed Pods Frameworks */ = {
@@ -458,6 +500,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E979D4B1E934FAF007BE7C6 /* ReviewViewController.swift in Sources */,
 				3E40671C1E711F9E004C8EEB /* HomeViewController.swift in Sources */,
 				3E8957AE1E7DD1C50097D3BF /* AddShadow.swift in Sources */,
 				3E4A4F0E1E736C56005F5B9D /* ResultListController.swift in Sources */,
@@ -465,19 +508,24 @@
 				3E4A4F181E76D151005F5B9D /* DetailViewController.swift in Sources */,
 				3E40673B1E7121B5004C8EEB /* Constants.swift in Sources */,
 				3E4067421E719732004C8EEB /* NavBarView.swift in Sources */,
+				3E3611191E8AFB7000B4EAD8 /* SpeechRecognitionViewController.swift in Sources */,
 				3E4A4F101E738189005F5B9D /* ResultListCell.swift in Sources */,
 				3E4A4F1B1E76DD97005F5B9D /* OverViewView.swift in Sources */,
 				3E4067491E71C725004C8EEB /* FrequentSearchCell.swift in Sources */,
 				3E4A4F1D1E76E3B9005F5B9D /* MenuBarView.swift in Sources */,
-				3E4A4F131E73BE15005F5B9D /* Product.swift in Sources */,
+				3E65C0A81E91EAFB000DEC81 /* RatingControl.swift in Sources */,
 				3E4A4F1F1E76F643005F5B9D /* MenuCell.swift in Sources */,
 				3E4A4F161E73C53F005F5B9D /* Service.swift in Sources */,
 				3E40673D1E712231004C8EEB /* Extensions.swift in Sources */,
+				3E979D4D1E9416FA007BE7C6 /* ReviewTableCell.swift in Sources */,
+				3E979D581E96CF5A007BE7C6 /* HomePageViewCell.swift in Sources */,
+				3E979D561E968071007BE7C6 /* HomePageViewController.swift in Sources */,
 				3E2D9D0F1E7AF7EF00899B30 /* OverViewViewController.swift in Sources */,
 				3E4067441E71A87A004C8EEB /* SearchFieldView.swift in Sources */,
 				3E362CF81E79ADE600B467A7 /* SubDetailPageViewController.swift in Sources */,
 				3E8957AC1E7DCEF80097D3BF /* OtherProductsCell.swift in Sources */,
 				3E2D9D121E7C7DDB00899B30 /* LoadingView.swift in Sources */,
+				3E979D531E943EDF007BE7C6 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,7 +662,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BC780B808EBE7A21A49D2442 /* Pods-ComparisonGuru.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2BULHRS882;
 				INFOPLIST_FILE = ComparisonGuru/Info.plist;
@@ -629,7 +677,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6A377C1F11B01470BDA12AAA /* Pods-ComparisonGuru.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2BULHRS882;
 				INFOPLIST_FILE = ComparisonGuru/Info.plist;
@@ -647,8 +695,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 2BULHRS882;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComparisonGuruTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.quasar.ComparisonGuruTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -663,8 +712,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 2BULHRS882;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = ComparisonGuruTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.quasar.ComparisonGuruTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

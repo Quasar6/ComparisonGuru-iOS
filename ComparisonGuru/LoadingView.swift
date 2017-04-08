@@ -25,6 +25,13 @@ class LoadingView: UIView {
         return label
     }()
     
+    let cancelButton:UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("X", for: .normal)
+        button.tintColor = .white
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 10
@@ -40,6 +47,9 @@ class LoadingView: UIView {
         
         addSubview(loadingLabel)
         loadingLabel.anchor(indicator.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 4, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+        
+        addSubview(cancelButton)
+        cancelButton.anchor(topAnchor, left: nil, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 30, heightConstant: 30)
     }
     
     override var isHidden: Bool {

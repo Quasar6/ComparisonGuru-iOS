@@ -10,10 +10,15 @@ import UIKit
 import TRON
 import SwiftyJSON
 
-class HomeViewController: UIViewController {
+//import AVFoundation
 
+class HomeViewController: UIViewController {
+    
     let cellId = "cellId"
     let frequentHeaderId = "frequentHeaderId"
+    
+    
+    
     
     let navBarView: NavBarView = {
         let navBar = NavBarView()
@@ -23,10 +28,22 @@ class HomeViewController: UIViewController {
     
     lazy var searchField: SearchFieldView = {
         let sf = SearchFieldView()
-        sf.searchField.delegate = self
         sf.translatesAutoresizingMaskIntoConstraints = false
+        sf.searchField.delegate = self
+        sf.micButtonTouched = {[weak self] in
+//            self?.askSpeechPermission()
+            self?.goToSpeechRecognitionViewController()
+        }
         return sf
     }()
+    
+    func goToSpeechRecognitionViewController() {
+        
+//        let speechVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeechRecognitionViewController")
+        guard let speechVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() else {return}
+        
+        navigationController?.present(speechVC, animated: true, completion: nil)
+    }
     
     let headerLabel: UILabel = {
         let label = UILabel()
@@ -57,14 +74,15 @@ class HomeViewController: UIViewController {
         view.isHidden = true
         return view
     }()
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return UIStatusBarStyle.lightContent
-//    }
+    
+    var trendingProducts = [Product]()
+    
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setNeedsStatusBarAppearanceUpdate()
-//        self.modalPresentationCapturesStatusBarAppearance = true
-//        self.navigationController?.navigationBar.barStyle = .black
+        
+        loadTrendingProducts()
         
         view.backgroundColor = .white
         collectionView.layer.masksToBounds = false
@@ -73,6 +91,12 @@ class HomeViewController: UIViewController {
         setupViews()
         collectionView.register(FrequentSearchCell.self, forCellWithReuseIdentifier: cellId)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     
     fileprivate func setupViews() {
         view.addSubview(searchField)
@@ -117,22 +141,45 @@ class HomeViewController: UIViewController {
             self.navigationController?.pushViewController(resultController, animated: true)
             
         }
-        
-        
     }
-
-
+    
+    func loadTrendingProducts(){
+        Service.sharedInstance.fetchFrequentSearchedProduct { (trendDatasource, err) in
+            if let _ = err {
+                if let apiError = err as? APIError<Service.JSONError> {
+                    if apiError.response?.statusCode != 200 {
+                        print(apiError.response?.statusCode ?? "not found status code")
+                    }
+                }
+                return
+            }
+            
+            if let trendingProducts = trendDatasource?.products {
+                self.trendingProducts = trendingProducts
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+            
+        }
+    }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
 // MARK: collection view cell section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return trendingProducts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FrequentSearchCell
+        
+        if !trendingProducts.isEmpty {
+            cell.trendingProduct = trendingProducts[indexPath.item]
+        }
+        
+        
         return cell
     }
     
@@ -146,6 +193,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("you did selected \(indexPath.item) item")
+        let detailViewController = DetailViewController()
+        detailViewController.product = trendingProducts[indexPath.item]
+        navigationController?.pushViewController(detailViewController, animated: true)
+        
     }
 }
 
@@ -166,3 +217,21 @@ extension HomeViewController: UITextFieldDelegate {
         searchField.endEditing(true)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

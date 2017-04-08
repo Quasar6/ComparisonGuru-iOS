@@ -22,7 +22,7 @@ class FrequentSearchCell: UICollectionViewCell {
     let productTitleLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Google Pixel"
+//        lbl.text = "Google Pixel"
         lbl.font = .systemFont(ofSize: 14)
         lbl.numberOfLines = 0
         return lbl
@@ -31,14 +31,14 @@ class FrequentSearchCell: UICollectionViewCell {
     let priceTagLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "CAD 399"
+//        lbl.text = "CAD 399"
         lbl.font = .boldSystemFont(ofSize: 16)
         
         return lbl
     }()
     
     let storeImageView: UIImageView = {
-        let iv = UIImageView(image: #imageLiteral(resourceName: "walmart"))
+        let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
@@ -50,6 +50,19 @@ class FrequentSearchCell: UICollectionViewCell {
         setupCellShadow()
         setupViews()
         backgroundColor = .white
+    }
+    
+    var trendingProduct: Product? {
+        didSet{
+            updateProduct()
+        }
+    }
+    
+    fileprivate func updateProduct() {
+        guard let trendingProduct = trendingProduct else{return}
+        productTitleLabel.text = trendingProduct.name
+        priceTagLabel.text = "\(trendingProduct.currency) \(trendingProduct.price)"
+        storeImageView.image = Helper.getStoreImageFromName(store: trendingProduct.store)
     }
     
     fileprivate func setupCellShadow(){
@@ -76,8 +89,10 @@ class FrequentSearchCell: UICollectionViewCell {
         productImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         addSubview(productTitleLabel)
-        productTitleLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 12).isActive = true
+        productTitleLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 4).isActive = true
         productTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        productTitleLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.9).isActive = true
+        productTitleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         addSubview(storeImageView)
         storeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
@@ -88,7 +103,7 @@ class FrequentSearchCell: UICollectionViewCell {
         addSubview(priceTagLabel)
         priceTagLabel.bottomAnchor.constraint(equalTo: storeImageView.topAnchor, constant: -8).isActive = true
         priceTagLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        
+        priceTagLabel.widthAnchor.constraint(lessThanOrEqualTo: widthAnchor, multiplier: 0.9).isActive = true
         
     }
     

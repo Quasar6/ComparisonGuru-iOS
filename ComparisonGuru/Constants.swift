@@ -18,3 +18,18 @@ struct Color {
 struct Font {
     static let helveticaNeueBold = "HelveticaNeue-Bold"
 }
+
+struct Helper {
+    static func getStoreImageFromName(store:String) -> UIImage {
+        switch store {
+        case "bestbuy":
+            return #imageLiteral(resourceName: "bestbuy")
+        case "ebay":
+            return #imageLiteral(resourceName: "ebay")
+        case "walmart":
+            return #imageLiteral(resourceName: "walmart")
+        default:
+            return #imageLiteral(resourceName: "walmart")
+        }
+    }
+}

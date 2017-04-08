@@ -10,13 +10,14 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    var something:Product? {
+    var product:Product? {
         didSet{
-            print(self.something?.category ?? "")
+            print(self.product?.category ?? "no product received")
+            subDetailPageViewController.product = product
         }
     }
     
-    lazy var subDetailPageView: SubDetailPageViewController = {
+    lazy var subDetailPageViewController: SubDetailPageViewController = {
         let vc = SubDetailPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         self.addViewControllerAsChildViewController(childViewController:vc)
         vc.pageSwiped = {[weak self](index) in
@@ -41,7 +42,7 @@ class DetailViewController: UIViewController {
     var preIndex:Int = 0
     func changeCurrentPageView(index:Int) {
         let direction = index > preIndex ? UIPageViewControllerNavigationDirection.forward : UIPageViewControllerNavigationDirection.reverse
-        subDetailPageView.setViewControllers([subDetailPageView.orderedViewControllers[index]], direction: direction, animated: true) { (ok) in
+        subDetailPageViewController.setViewControllers([subDetailPageViewController.orderedViewControllers[index]], direction: direction, animated: true) { (ok) in
             if ok {
                 self.preIndex = index
             }
@@ -56,6 +57,10 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
+        navigationController?.isNavigationBarHidden = false
+
+        navigationController?.hidesBarsOnSwipe = false
+//        setupNavigation()
         
         setupMenuBar()
         setupSubviews()
@@ -64,6 +69,21 @@ class DetailViewController: UIViewController {
         
     }
     
+    func setupNavigation() {
+        let leftButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleDismiss))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: nil)
+        navigationItem.leftBarButtonItem = leftButton
+//        navigationController?.navigationItem.leftBarButtonItem =
+        navigationController?.navigationBar.barTintColor = Color.menuBarTintColor
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barStyle = .black
+    }
+
+    func handleDismiss(){
+        dismiss(animated: true, completion: nil)
+    }
     func setupMenuBar(){
         view.addSubview(menuBarView)
         menuBarView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
@@ -78,7 +98,7 @@ class DetailViewController: UIViewController {
 extension DetailViewController {
     
     fileprivate func setupSubviews() {
-        subDetailPageView.view.isHidden = false
+        subDetailPageViewController.view.isHidden = false
     }
     
     

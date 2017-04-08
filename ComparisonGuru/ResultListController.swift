@@ -15,8 +15,9 @@ class ResultListController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+//        navigationController?.hidesBarsOnSwipe = true
         
-        navigationController?.hidesBarsOnSwipe = true
+        setupNavItems()
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 140
@@ -26,6 +27,15 @@ class ResultListController: UITableViewController {
         
     }
 
+    private func setupNavItems(){
+        let leftButton = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(handleLeftNavButtonClicked))
+        navigationItem.leftBarButtonItem = leftButton
+    }
+    
+    func handleLeftNavButtonClicked(){
+        dismiss(animated: true, completion: nil)
+    }
+    
     func whiteStatusBarBackground(){
         let whiteView = UIView()
         whiteView.backgroundColor = .white
@@ -36,6 +46,8 @@ class ResultListController: UITableViewController {
     override var prefersStatusBarHidden: Bool {
         return navigationController?.isNavigationBarHidden ?? false
     }
+    
+    
     
     // MARK: - Table view data source
 
@@ -59,9 +71,13 @@ class ResultListController: UITableViewController {
         }
             cell.priceLabel.text = "\(product.currency)  \(price)"
         
-
+        let storeName = products[indexPath.row].store
+        cell.storeImage.image = Helper.getStoreImageFromName(store: storeName)
+        
         return cell
     }
+    
+    
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
@@ -81,10 +97,16 @@ class ResultListController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
-        present(detailViewController, animated: true) {
-            detailViewController.something = self.products[indexPath.row]
-            print("passed product")
-        }
-//        navigationController?.pushViewController(detailViewController, animated: true)
+        
+//        let newNavigationController = UINavigationController(rootViewController: detailViewController)
+        
+        
+        
+//        navigationController?.present(newNavigationController, animated: true, completion: {
+            detailViewController.product = self.products[indexPath.row]
+//            print("passed product")
+//        })
+        navigationController?.pushViewController(detailViewController, animated: true)
+        
     }
 }

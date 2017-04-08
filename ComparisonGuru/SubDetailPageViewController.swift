@@ -12,6 +12,17 @@ class SubDetailPageViewController: UIPageViewController {
 
     var pageSwiped:((_ index:Int) -> Void)?
     
+    var product:Product?{
+        didSet{
+            passProduct()
+        }
+    }
+    
+    private func passProduct(){
+        myView.product = self.product
+        reviewViewController.product = self.product
+    }
+    
     let myView:OverViewViewController = {
         let view = OverViewViewController()
         return view
@@ -19,18 +30,22 @@ class SubDetailPageViewController: UIPageViewController {
     
     lazy var secondViewController: UIViewController = {
         let vc = UIViewController()
-        vc.view.backgroundColor = .blue
+        vc.view.backgroundColor = .white
+        
+        let label = UILabel(frame: CGRect(x: vc.view.frame.midX, y: vc.view.frame.midY, width: 100, height: 30))
+            label.text = "Page 2"
+        vc.view.addSubview(label)
         return vc
     }()
     
-    lazy var thirdViewController: UIViewController = {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .gray
+    lazy var reviewViewController: ReviewViewController = {
+        let vc = UIStoryboard(name: "DetailPage", bundle: nil).instantiateViewController(withIdentifier: "ReviewViewController") as! ReviewViewController
+        
         return vc
     }()
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [self.myView, self.secondViewController, self.thirdViewController]
+        return [self.myView, self.secondViewController, self.reviewViewController]
     }()
     
     override func viewDidLoad() {
