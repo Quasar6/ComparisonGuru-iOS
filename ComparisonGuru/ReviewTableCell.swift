@@ -29,11 +29,35 @@ class ReviewTableCell: UITableViewCell {
             
             ratingControl.starCount = review.rating
             ratingControl.rating = review.rating
-            dateLabel.text = review.date
+            
+            dateLabel.text = convertDateToTimeAgo(to:review.date)
             commentLabel.text = review.comment
             userProfileImageView.loadImageUsingUrlString(urlString: review.userImage)
         }
     }
+    
+    func convertDateToTimeAgo(to date: String) -> String {
+        let myCurrentDate = Date()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ" //"2017-04-10T00:31:44-04:00"
+        guard let date = dateFormatter.date(from: date) else {
+            assert(false, "no date from string")
+            return ""
+        }
+        
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .short
+        formatter.maximumUnitCount = 1
+        //For example, if minutes aren't allowed, then "1h 30m" could be formatted as "1.5h". Default is NO
+        formatter.allowsFractionalUnits = false
+        if let timeStamp = formatter.string(from: date, to: myCurrentDate){
+            return "\(timeStamp) ago"
+        } else {
+            return ""
+        }
+    }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

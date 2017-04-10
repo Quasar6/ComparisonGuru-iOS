@@ -47,9 +47,6 @@ class TrendingChartViewController: UIViewController {
         let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-        
-        
         guard let date = dateFormatter.date(from: date) else {
             assert(false, "no date from string")
             return ""
