@@ -10,6 +10,7 @@ target 'ComparisonGuru' do
   pod 'WZLibrary','~> 0.1.1'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
+  pod 'Charts'
 
   target 'ComparisonGuruTests' do
     inherit! :search_paths

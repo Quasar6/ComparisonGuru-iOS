@@ -21,6 +21,7 @@ class SubDetailPageViewController: UIPageViewController {
     private func passProduct(){
         myView.product = self.product
         reviewViewController.product = self.product
+        trendingChartViewController.product = self.product
     }
     
     let myView:OverViewViewController = {
@@ -28,13 +29,8 @@ class SubDetailPageViewController: UIPageViewController {
         return view
     }()
     
-    lazy var secondViewController: UIViewController = {
-        let vc = UIViewController()
-        vc.view.backgroundColor = .white
-        
-        let label = UILabel(frame: CGRect(x: vc.view.frame.midX, y: vc.view.frame.midY, width: 100, height: 30))
-            label.text = "Page 2"
-        vc.view.addSubview(label)
+    lazy var trendingChartViewController: TrendingChartViewController = {
+        let vc = UIStoryboard(name: "DetailPage", bundle: nil).instantiateViewController(withIdentifier: "TrendingChartViewController") as! TrendingChartViewController
         return vc
     }()
     
@@ -45,7 +41,7 @@ class SubDetailPageViewController: UIPageViewController {
     }()
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [self.myView, self.secondViewController, self.reviewViewController]
+        return [self.myView, self.trendingChartViewController, self.reviewViewController]
     }()
     
     override func viewDidLoad() {

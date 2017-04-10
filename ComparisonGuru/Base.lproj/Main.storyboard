@@ -26,8 +26,12 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWI-3n-1yr">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Ma-2F-JXf">
-                                        <rect key="frame" x="38" y="166" width="300" height="30"/>
+                                    <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Ma-2F-JXf">
+                                        <rect key="frame" x="36" y="166" width="300" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="TdQ-CU-AWO"/>
+                                        </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="go"/>
@@ -43,7 +47,7 @@
                                         </constraints>
                                     </imageView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-DU-OHR">
-                                        <rect key="frame" x="16" y="267" width="359.5" height="300"/>
+                                        <rect key="frame" x="16" y="256" width="357.5" height="300"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="300" id="u4N-4m-0MD"/>
@@ -118,13 +122,13 @@
                                     </collectionView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="7Ma-2F-JXf" firstAttribute="leading" secondItem="dWI-3n-1yr" secondAttribute="leading" constant="37.5" id="1cI-Gi-S7W"/>
                                     <constraint firstAttribute="bottom" secondItem="X6N-DU-OHR" secondAttribute="bottom" constant="-87" id="6DG-9N-ee6"/>
                                     <constraint firstItem="X6N-DU-OHR" firstAttribute="leading" secondItem="dWI-3n-1yr" secondAttribute="leadingMargin" constant="8" id="7hQ-4v-q97"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Ma-2F-JXf" secondAttribute="trailing" constant="26" id="FbU-MV-YYP"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="X6N-DU-OHR" secondAttribute="trailing" constant="-19.5" id="JaJ-PF-MkE"/>
-                                    <constraint firstItem="X6N-DU-OHR" firstAttribute="top" secondItem="7Ma-2F-JXf" secondAttribute="bottom" constant="71" id="NE5-SN-FLk"/>
-                                    <constraint firstAttribute="trailing" secondItem="7Ma-2F-JXf" secondAttribute="trailing" constant="26" id="k7d-QR-D32"/>
+                                    <constraint firstItem="X6N-DU-OHR" firstAttribute="top" secondItem="7Ma-2F-JXf" secondAttribute="bottom" constant="50" id="NE5-SN-FLk"/>
                                     <constraint firstItem="t1K-D1-KAV" firstAttribute="top" secondItem="dWI-3n-1yr" secondAttribute="top" constant="70" id="lJt-6N-SK5"/>
+                                    <constraint firstItem="7Ma-2F-JXf" firstAttribute="leading" secondItem="dWI-3n-1yr" secondAttribute="leading" constant="36" id="mNM-Wk-4dL"/>
                                     <constraint firstItem="t1K-D1-KAV" firstAttribute="centerX" secondItem="dWI-3n-1yr" secondAttribute="centerX" id="oip-mn-S6B"/>
                                     <constraint firstItem="7Ma-2F-JXf" firstAttribute="top" secondItem="t1K-D1-KAV" secondAttribute="bottom" constant="16" id="p9s-pF-1BZ"/>
                                 </constraints>
@@ -284,7 +288,41 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-931.875" y="1.056338028169014"/>
+            <point key="canvasLocation" x="-932" y="0.44977511244377816"/>
+        </scene>
+        <!--Chart View Controller-->
+        <scene sceneID="k67-r1-gHw">
+            <objects>
+                <viewController id="KRL-kg-m2w" customClass="ChartViewController" customModule="ComparisonGuru" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="L9B-zd-ETE"/>
+                        <viewControllerLayoutGuide type="bottom" id="Aa4-NV-XVB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="g1D-eX-0VF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QV5-xn-e8P" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Aa4-NV-XVB" firstAttribute="top" secondItem="QV5-xn-e8P" secondAttribute="bottom" id="0do-U6-q8A"/>
+                            <constraint firstItem="QV5-xn-e8P" firstAttribute="top" secondItem="L9B-zd-ETE" secondAttribute="bottom" id="4HT-sY-gZG"/>
+                            <constraint firstItem="QV5-xn-e8P" firstAttribute="leading" secondItem="g1D-eX-0VF" secondAttribute="leading" id="Vvg-Nq-2IE"/>
+                            <constraint firstAttribute="trailing" secondItem="QV5-xn-e8P" secondAttribute="trailing" id="cQn-mq-NfL"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="chartView" destination="QV5-xn-e8P" id="1Qb-fV-Io2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g82-tf-agt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-62" y="-705"/>
         </scene>
         <!--Speech Recognition View Controller-->
         <scene sceneID="tne-QT-ifu">

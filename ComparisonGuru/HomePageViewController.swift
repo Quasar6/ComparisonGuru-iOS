@@ -12,7 +12,7 @@ import Firebase
 import GoogleSignIn
 
 class HomePageViewController: UIViewController, GIDSignInUIDelegate {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var topUserInfoView: UIView!
     @IBOutlet weak var userImage: UIImageView!
@@ -88,7 +88,7 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
         showSignOutBackgroundView()
         signOutButtonTopConstrain.constant = 40
         signOutButton.alpha = 1
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseOut, animations: { 
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
             self.view.layer.layoutIfNeeded()
         }, completion: nil)
     }
@@ -159,7 +159,7 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
         loginView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
-
+            
             self.loginView.transform = .identity
         }, completion: nil)
     }
@@ -191,10 +191,14 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
     private func setupSearchField(){
         searchField.rightView = micButton
         searchField.rightViewMode = .always
-        searchField.layer.borderWidth = 2.0
-        searchField.layer.borderColor = Color.searchFieldBorderColor.cgColor
+        searchField.layer.borderWidth = 1.0
+        searchField.layer.borderColor = UIColor.lightGray.cgColor//Color.searchFieldBorderColor.cgColor
         searchField.layer.cornerRadius = 10
-        searchField.layer.masksToBounds = true
+        searchField.layer.masksToBounds = false
+        
+        searchField.layer.shadowOpacity = 0.3
+        searchField.layer.shadowRadius = 2
+        searchField.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
     
     let loadingBackgroundView = UIView()
@@ -225,9 +229,9 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
             if let _ = err {
                 if let apiError = err as? APIError<Service.JSONError> {
                     if apiError.response?.statusCode != 200 {
-                            print(apiError.response?.statusCode ?? "not found status code")
-                            self.loadingView.indicator.stopAnimating()
-                            self.loadingView.loadingLabel.text = "Error Code: \(apiError.response?.statusCode)"
+                        print(apiError.response?.statusCode ?? "not found status code")
+                        self.loadingView.indicator.stopAnimating()
+                        self.loadingView.loadingLabel.text = "Error Code: \(apiError.response?.statusCode)"
                         
                     }
                 }
@@ -253,18 +257,14 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
                 }
                 return
             }
-            
             if let trendingProducts = trendDatasource?.products {
                 self.trendingProducts = trendingProducts
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
             }
-            
         }
     }
-
-
 }
 
 extension HomePageViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -296,7 +296,15 @@ extension HomePageViewController: UICollectionViewDataSource, UICollectionViewDe
         print("you did selected \(indexPath.item) item")
         let detailViewController = DetailViewController()
         detailViewController.product = trendingProducts[indexPath.item]
-        navigationController?.pushViewController(detailViewController, animated: true)
+        
+        let navController = UINavigationController(rootViewController: detailViewController)
+        
+        
+        present(navController, animated: true){
+            navController.navigationBar.isTranslucent = false
+            let leftButton = UIBarButtonItem(title: " Home", style: .plain, target: detailViewController, action: #selector(detailViewController.handleDismiss))
+            detailViewController.navigationItem.leftBarButtonItem = leftButton
+        }
         
     }
 }

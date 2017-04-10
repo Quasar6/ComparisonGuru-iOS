@@ -9,10 +9,12 @@
 import Foundation
 import TRON
 import SwiftyJSON
+import Alamofire
 
 let baseUrl = "https://cguru-quasar6.rhcloud.com/"
 let productPriceUrl = "cheapest"
 let trendUrl = "products"
+let commentUrl = "products/review"
 
 struct Service {
     let tron = TRON(baseURL: baseUrl)
@@ -41,8 +43,19 @@ struct Service {
             completion(nil,err)
             print("Failed to fetch json from frequentSearch product")
         }
-        
-        
+    }
+    
+    func postComment(parameters: JSON, completion:@escaping (Error?)->()){
+        let request: APIRequest<String,JSONError> = tron.request(commentUrl)
+        request.method = .post
+        request.parameters = parameters.dictionaryObject!
+        request.perform(withSuccess: { (info) in
+            print("info: \(info)")
+            completion(nil)
+        }) { (error) in
+            print("error: \(error)")
+            completion(error)
+        }
     }
     
     class JSONError: JSONDecodable {
@@ -52,18 +65,6 @@ struct Service {
     }
 }
 
-//class TrendDataSource: JSONDecodable {
-//    let trendingProducts:[TrendingProduct]
-//    
-//    required init(json: JSON) throws {
-//        guard let array = json.array else {
-//            throw NSError(domain: "com.quasar", code: 1, userInfo: [NSLocalizedDescriptionKey: "Parsing JSON was not valid."])
-//        }
-//        
-//        self.trendingProducts = array.map{TrendingProduct(json: $0)}
-//    }
-//    
-//}
 
 class HomeDatasource: JSONDecodable {
     
