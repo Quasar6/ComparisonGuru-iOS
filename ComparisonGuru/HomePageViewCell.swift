@@ -33,8 +33,10 @@ class HomePageViewCell: UICollectionViewCell {
     private func updateProduct() {
         guard let trendingProduct = trendingProduct else{return}
         productTitleLabel.text = trendingProduct.name
-        priceTagLabel.text = "\(trendingProduct.currency) \(trendingProduct.price)"
+        let price = trendingProduct.salePrice == 0 ? trendingProduct.price : trendingProduct.salePrice
+        priceTagLabel.text = "\(trendingProduct.currency) \(price)"
         storeImageView.image = Helper.getStoreImageFromName(store: trendingProduct.store)
+        productImageView.loadImageUsingUrlString(urlString: trendingProduct.imageUrl)
     }
     
     private func setupCellShaow() {

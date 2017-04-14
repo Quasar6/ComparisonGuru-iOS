@@ -26,6 +26,8 @@ struct Product {
     let shippingCountry: String
     var reviews:[Review]?
     
+    var triggeredHit:Bool = false
+    
     init(json:JSON) {
         self._id = json["_id"].stringValue
         self.id = json["id"].stringValue
@@ -49,6 +51,21 @@ struct Product {
         }
     }
     
+    func toJSON() -> JSON {
+        let json:JSON = [
+            "id": id,
+            "name":name,
+            "category":category,
+            "price": price,
+            "salePrice": salePrice,
+            "store": store,
+            "currency": currency,
+            "url": url,
+            "imageURL": imageUrl,
+            "shippingCountry": shippingCountry
+        ]
+        return json
+    }
     
 }
 
@@ -66,6 +83,16 @@ struct Review {
         self.userName = json["userName"].stringValue
         self.userImage = json["userImage"].stringValue
     }
+    
+    func toJSON()-> JSON {
+        return [
+            "comment": comment,
+            "rating": rating,
+            "date": date,
+            "userName": userName,
+            "userImage": userImage
+        ]
+    }
 }
 
 struct Trend {
@@ -75,6 +102,13 @@ struct Trend {
     init(json:JSON) {
         self.price = json["price"].doubleValue
         self.date = json["date"].stringValue
+    }
+    
+    func toJSON() -> JSON {
+        return [
+            "price":price,
+            "date": date
+        ]
     }
     
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ResultListController: UITableViewController {
     let cellId = "resultListCell"
@@ -98,14 +99,19 @@ class ResultListController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
         
-//        let newNavigationController = UINavigationController(rootViewController: detailViewController)
+            var product = products[indexPath.row]
+            detailViewController.product = product
         
-        
-        
-//        navigationController?.present(newNavigationController, animated: true, completion: {
-            detailViewController.product = self.products[indexPath.row]
-//            print("passed product")
-//        })
+        //prevent constantly update one product by multiple clicks
+        if !product.triggeredHit {
+            Service.sharedInstance.updateTrendingProduct(parameters: product.toJSON()) { (error) in
+                if let error = error {
+                    print(error)
+                }
+                product.triggeredHit = true
+            }
+        }
+
         navigationController?.pushViewController(detailViewController, animated: true)
         
     }

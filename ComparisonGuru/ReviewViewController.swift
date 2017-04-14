@@ -28,7 +28,11 @@ class ReviewViewController: UIViewController, UITableViewDataSource,UITableViewD
     let countLimit = 140
 
     let cellId = "reviewCell"
-    var product:Product!
+    var product:Product!{
+        didSet{
+            self.product.reviews?.reverse()
+        }
+    }
     
     private func updateComments(){
         tableView.reloadData()
@@ -79,10 +83,17 @@ class ReviewViewController: UIViewController, UITableViewDataSource,UITableViewD
                 "userName": user.displayName ?? "",
                 "userImage": user.photoURL?.absoluteString ?? ""
             ]
-            Service.sharedInstance.postComment(parameters: json, completion: { error in
-                //TODO: update model
+            
+            Service.sharedInstance.postComment(parameters: json, completion: { (product, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                self.product = product?.product
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             })
-            print(json)
         }
         
         

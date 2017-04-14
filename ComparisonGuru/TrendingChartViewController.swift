@@ -27,7 +27,8 @@ class TrendingChartViewController: UIViewController {
             for i in 0..<trends.count {
                 let dataEntry = ChartDataEntry(x: Double(i), y: trends[i].price)
                 dataEntries.append(dataEntry)
-                
+                //TODO: check the year assign it to different dataset
+                let year = converToYearFormat(date: trends[i].date)
                 dateValue.append(convertDateFormater(date: trends[i].date))
             }
             
@@ -42,6 +43,20 @@ class TrendingChartViewController: UIViewController {
         }
         
     }
+    
+    func converToYearFormat(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        guard let date = dateFormatter.date(from: date) else {
+            assert(false, "no date from string")
+            return ""
+        }
+        let calendar = Calendar.autoupdatingCurrent
+        let component = calendar.component(.year, from: date)
+        print("year: \(component)")
+        return "\(component)"
+    }
 
     func convertDateFormater(date: String) -> String {
         let dateFormatter = DateFormatter()
@@ -52,8 +67,8 @@ class TrendingChartViewController: UIViewController {
             return ""
         }
         
-        dateFormatter.dateFormat = "y/MMM/d"
-        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = "MMM d"
+//        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
         let timeStamp = dateFormatter.string(from: date)
         print(timeStamp)
         return timeStamp

@@ -44,10 +44,14 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
         button.addTarget(self, action: #selector(goToSpeechRecognitionViewController), for: .touchUpInside)
         return button
     }()
-    
+    var speechVC: SpeechRecognitionViewController!
     func goToSpeechRecognitionViewController() {
-        let speechVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeechRecognitionViewController")
-        present(speechVC, animated: true, completion: nil)
+        speechVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeechRecognitionViewController") as? SpeechRecognitionViewController
+        speechVC.feedBackContent = { [weak self] content in
+            self?.searchField.text = content
+            self?.handleSearched(text: content)
+        }
+        present(speechVC!, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -142,8 +146,7 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
         }, completion: nil)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    deinit {
         removeUserStateObserver()
     }
     
@@ -171,9 +174,13 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
         }
     }
     
+    
+    
     private func signOutUser(){
+        
         let firebaseAuth = FIRAuth.auth()
         do {
+            GIDSignIn.sharedInstance().signOut()
             try firebaseAuth?.signOut()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
@@ -225,6 +232,7 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
     
     
     func handleSearched(text: String) {
+        showLoadingView()
         Service.sharedInstance.fetchHomeFeed(productName: text) { (homeDatasource, err) in
             if let _ = err {
                 if let apiError = err as? APIError<Service.JSONError> {
@@ -314,7 +322,6 @@ extension HomePageViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let text = textField.text ?? ""
         if text != "" {
-            showLoadingView()
             handleSearched(text: text)
             print(text)
         }

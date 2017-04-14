@@ -11,6 +11,7 @@ import Speech
 
 class SpeechRecognitionViewController: UIViewController {
     // MARK: - IBOutlets
+    @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var micButton: UIButton!
     
@@ -21,11 +22,11 @@ class SpeechRecognitionViewController: UIViewController {
     fileprivate var recognitionTask: SFSpeechRecognitionTask?
     
     
-    private var isListen:Bool = false {
+    private var isListen:Bool = false{
         didSet{
             let image = isListen ? #imageLiteral(resourceName: "mic_highLighted") : #imageLiteral(resourceName: "mic")
             micButton.setImage(image, for: .normal)
-            textLabel.text = isListen ? "I'm listening..." : "Click mic button to speak"
+            textLabel.text = isListen ? "I'm listening..." : "Hold the mic button to speak"
         }
     }
     
@@ -35,33 +36,47 @@ class SpeechRecognitionViewController: UIViewController {
         speechRecognizer?.delegate = self
         
     }
+    @IBAction func micButtonHoldDown(_ sender: UIButton) {
+        isListen = true
+        contentLabel.text = ""
+        askSpeechPermission()
+    }
     
     @IBAction func micButtonTouched(_ sender: UIButton) {
-        isListen = !isListen
-        if isListen {
-            askSpeechPermission()
-        }
-        
+        isListen = false
+        endRecording()
     }
     
-    @IBAction func toolbarButtonTouched(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-}
-
-extension SpeechRecognitionViewController: SFSpeechRecognizerDelegate {
-    
-    func microphoneTapped() {
+    fileprivate func endRecording(){
         if audioEngine.isRunning {
             audioEngine.stop()
             recognitionRequest?.endAudio()
             
         }
+    }
+    
+    var feedBackContent:((String) -> Void)?
+    
+    @IBAction func toolbarButtonTouched(_ sender: UIBarButtonItem) {
+        if sender.tag == 1 {
+            if let content = self.contentLabel.text, content != "" {
+                self.feedBackContent?(content)
+            }
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+extension SpeechRecognitionViewController: SFSpeechRecognizerDelegate {
+    
+    fileprivate func microphoneTapped() {
+        endRecording()
         startRecording()
         
     }
     
-    func askSpeechPermission() {
+    fileprivate func askSpeechPermission() {
         SFSpeechRecognizer.requestAuthorization { (authStatus) in
             OperationQueue.main.addOperation {
                 switch authStatus {
@@ -84,7 +99,7 @@ extension SpeechRecognitionViewController: SFSpeechRecognizerDelegate {
         }
     }
     
-    func startRecording() {
+    fileprivate func startRecording() {
         
         if recognitionTask != nil {
             recognitionTask?.cancel()
@@ -118,7 +133,7 @@ extension SpeechRecognitionViewController: SFSpeechRecognizerDelegate {
             if result != nil {
                 
                 //update textfield
-                self.textLabel.text = result?.bestTranscription.formattedString
+                self.contentLabel.text = result?.bestTranscription.formattedString
                 isFinal = (result?.isFinal)!
             }
             
@@ -129,8 +144,6 @@ extension SpeechRecognitionViewController: SFSpeechRecognizerDelegate {
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
                 
-                //active mic icon
-                //                self.searchField.voiceIconTouched.isUserInteractionEnabled = true
             }
         })
         

@@ -27,10 +27,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <textField clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Ma-2F-JXf">
-                                        <rect key="frame" x="36" y="166" width="300" height="40"/>
+                                        <rect key="frame" x="36" y="166" width="300" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="TdQ-CU-AWO"/>
+                                            <constraint firstAttribute="height" constant="50" id="TdQ-CU-AWO"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -47,7 +47,7 @@
                                         </constraints>
                                     </imageView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X6N-DU-OHR">
-                                        <rect key="frame" x="16" y="256" width="357.5" height="300"/>
+                                        <rect key="frame" x="16" y="266" width="358" height="300"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="300" id="u4N-4m-0MD"/>
@@ -174,9 +174,9 @@
                                 <rect key="frame" x="0.0" y="20" width="125" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a52-ua-Bn3">
-                                        <rect key="frame" x="41" y="2" width="43" height="30"/>
+                                        <rect key="frame" x="42" y="2" width="42" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="SignIn"/>
+                                        <state key="normal" title="Log In"/>
                                         <connections>
                                             <action selector="signInButtonTouched:" destination="OQg-Lo-qTC" eventType="touchUpInside" id="rdy-QM-2u3"/>
                                         </connections>
@@ -322,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g82-tf-agt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-62" y="-705"/>
+            <point key="canvasLocation" x="-37" y="-766"/>
         </scene>
         <!--Speech Recognition View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -336,9 +336,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UOg-Ro-Xry">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOg-Ro-Xry">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem systemItem="cancel" id="xcs-5u-RED">
                                         <connections>
@@ -346,33 +345,59 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="TDv-sr-Dx1"/>
-                                    <barButtonItem width="30" systemItem="done" id="CaD-hD-zvr">
+                                    <barButtonItem tag="1" systemItem="done" id="CaD-hD-zvr">
                                         <connections>
                                             <action selector="toolbarButtonTouched:" destination="BYZ-38-t0r" id="Met-U0-H8U"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Listening..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwm-TE-Edg">
-                                <rect key="frame" x="16" y="20" width="343" height="424"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0f-yK-TEr">
-                                <rect key="frame" x="160" y="526" width="54" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0f-yK-TEr">
+                                <rect key="frame" x="160" y="501" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="BBP-Kk-vgc"/>
+                                    <constraint firstAttribute="width" constant="56" id="Z6J-nz-1u3"/>
+                                </constraints>
                                 <state key="normal" title="Click" image="mic"/>
                                 <connections>
+                                    <action selector="micButtonHoldDown:" destination="BYZ-38-t0r" eventType="touchDown" id="nQb-jr-2gC"/>
                                     <action selector="micButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Mo-uy-d5J"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pd-2F-nKw">
+                                <rect key="frame" x="16" y="117" width="343" height="230"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="jcR-jI-Is2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold the mic button to speak" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwm-TE-Edg">
+                                <rect key="frame" x="16" y="465" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="d0f-yK-TEr" firstAttribute="top" secondItem="wwm-TE-Edg" secondAttribute="bottom" constant="15" id="C0E-Oy-1YC"/>
+                            <constraint firstItem="d0f-yK-TEr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K8D-9X-PUC"/>
+                            <constraint firstItem="8Pd-2F-nKw" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="U9Z-WB-vrU"/>
+                            <constraint firstAttribute="trailing" secondItem="UOg-Ro-Xry" secondAttribute="trailing" id="WIP-e1-Qpr"/>
+                            <constraint firstItem="UOg-Ro-Xry" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Yx0-jc-sAf"/>
+                            <constraint firstItem="wwm-TE-Edg" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="jow-Zw-39d"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UOg-Ro-Xry" secondAttribute="bottom" id="krc-KY-CGJ"/>
+                            <constraint firstItem="UOg-Ro-Xry" firstAttribute="top" secondItem="d0f-yK-TEr" secondAttribute="bottom" constant="66" id="lxM-Js-FBr"/>
+                            <constraint firstItem="wwm-TE-Edg" firstAttribute="top" secondItem="8Pd-2F-nKw" secondAttribute="bottom" constant="118" id="mJ7-p5-LoT"/>
+                            <constraint firstItem="wwm-TE-Edg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ygG-bX-koo"/>
+                            <constraint firstItem="8Pd-2F-nKw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="zqG-i5-Pk4"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="contentLabel" destination="8Pd-2F-nKw" id="Pfu-Ug-FG4"/>
                         <outlet property="micButton" destination="d0f-yK-TEr" id="3Vf-tb-vyv"/>
                         <outlet property="textLabel" destination="wwm-TE-Edg" id="Ycy-jt-H1k"/>
                     </connections>

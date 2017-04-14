@@ -45,15 +45,27 @@ struct Service {
         }
     }
     
-    func postComment(parameters: JSON, completion:@escaping (Error?)->()){
-        let request: APIRequest<String,JSONError> = tron.request(commentUrl)
+    func postComment(parameters: JSON, completion:@escaping (PostFeedbackDatasource?, Error?)->()){
+        let request: APIRequest<PostFeedbackDatasource,JSONError> = tron.request(commentUrl)
         request.method = .post
         request.parameters = parameters.dictionaryObject!
-        request.perform(withSuccess: { (info) in
-            print("info: \(info)")
+        request.perform(withSuccess: { (product) in
+            print("info: \(product)")
+            completion(product,nil)
+            
+        }) { (error) in
+//            print("a post error: \(error)")
+            completion(nil,error)
+        }
+    }
+    
+    func updateTrendingProduct(parameters: JSON, completion:@escaping (Error?)->()){
+        let request: APIRequest<String,JSONError> = tron.request(trendUrl)
+        request.method = .post
+        request.parameters = parameters.dictionaryObject!
+        request.perform(withSuccess: { (product) in
             completion(nil)
         }) { (error) in
-            print("error: \(error)")
             completion(error)
         }
     }
@@ -71,10 +83,37 @@ class HomeDatasource: JSONDecodable {
     let products:[Product]
     
     required init(json: JSON) throws {
+//        print(json)
         guard let array = json.array else {
             throw NSError(domain: "com.quasar", code: 1, userInfo: [NSLocalizedDescriptionKey: "Parsing JSON was not valid."])
         }
         self.products = array.map({Product(json:$0)})
+    }
+    
+    func getProducts() -> [Product] {
+        return products
+    }
+}
+
+class PostFeedbackDatasource: JSONDecodable {
+    
+    let product:Product
+    
+    required init(json: JSON) throws {
+//        print(json)
+//        guard let array = json.array else {
+//            throw NSError(domain: "com.quasar", code: 1, userInfo: [NSLocalizedDescriptionKey: "Parsing JSON was not valid."])
+//        }
+        
+        let valueObject = json["value"] as JSON
+        print("valueObject: \n\(valueObject)")
+//        self.products = valueObject.map({Product(json:$0)})
+        self.product = Product(json: valueObject)
+        
+    }
+    
+    func getProduct() -> Product {
+        return product
     }
 }
 
