@@ -11,18 +11,20 @@ import TRON
 import Firebase
 import GoogleSignIn
 
-class HomePageViewController: UIViewController, GIDSignInUIDelegate {
+class HomePageViewController: UIViewController {
     
+    struct StoryBoard {
+        static let toSpeechRecognitionVC = "toSpeechRecognition"
+        static let toLoginViewController = "toLoginViewController"
+    }
     // MARK: - Outlets
     @IBOutlet weak var topUserInfoView: UIView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var searchField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var trendingTitleLabel: UILabel!
     
-    // MARK: - Login Outlets
-    @IBOutlet var loginView: UIView!
-    @IBOutlet weak var signInButton: GIDSignInButton!
     
     // MARK: - Variables or Constants
     fileprivate var trendingProducts = [Product]()
@@ -44,28 +46,32 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
         button.addTarget(self, action: #selector(goToSpeechRecognitionViewController), for: .touchUpInside)
         return button
     }()
-    var speechVC: SpeechRecognitionViewController!
+    
     func goToSpeechRecognitionViewController() {
-        speechVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SpeechRecognitionViewController") as? SpeechRecognitionViewController
-        speechVC.feedBackContent = { [weak self] content in
-            self?.searchField.text = content
-            self?.handleSearched(text: content)
+        performSegue(withIdentifier: StoryBoard.toSpeechRecognitionVC, sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == StoryBoard.toSpeechRecognitionVC {
+            let speechVC = segue.destination as! SpeechRecognitionViewController
+            speechVC.feedBackContent = { [weak self] content in
+                self?.searchField.text = content
+                self?.handleSearched(text: content)
+            }
         }
-        present(speechVC!, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadTrendingProducts()
         collectionView.layer.masksToBounds = false
         setupSearchField()
-        
-        GIDSignIn.sharedInstance().uiDelegate = self
-        
+        trendingTitleLabel.isHidden = true
         observeUserState()
-        
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        loadTrendingProducts()
+    }
     var userStateHandler:FIRAuthStateDidChangeListenerHandle!
     
     @IBOutlet weak var topUserSignInButtonLeftConstrain: NSLayoutConstraint!
@@ -115,7 +121,6 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
     private func observeUserState(){
         userStateHandler = FIRAuth.auth()?.addStateDidChangeListener({ (auth, user) in
             if let user = user {
-                self.dismissLoginView()
                 self.showUserInfoView(loginUser: user)
             } else {
                 self.hideUserInfoView()
@@ -154,28 +159,6 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
         FIRAuth.auth()?.removeStateDidChangeListener(userStateHandler)
     }
     
-    // MARK: - handle login view
-    @IBAction func signInButtonTouched(_ sender: UIButton) {
-        
-        view.addSubview(loginView)
-        loginView.fillSuperview()
-        loginView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-        
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
-            
-            self.loginView.transform = .identity
-        }, completion: nil)
-    }
-    
-    @IBAction func loginViewDismissButtonTouched(_ sender: UIButton) {
-        signOutUser()
-        if loginView.superview != nil {
-            dismissLoginView()
-        }
-    }
-    
-    
-    
     private func signOutUser(){
         
         let firebaseAuth = FIRAuth.auth()
@@ -185,14 +168,6 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-    }
-    
-    private func dismissLoginView(){
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
-            self.loginView.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-        }, completion: { (success) in
-            self.loginView.removeFromSuperview()
-        })
     }
     
     private func setupSearchField(){
@@ -266,6 +241,7 @@ class HomePageViewController: UIViewController, GIDSignInUIDelegate {
                 return
             }
             if let trendingProducts = trendDatasource?.products {
+                self.trendingTitleLabel.isHidden = false
                 self.trendingProducts = trendingProducts
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
@@ -306,7 +282,6 @@ extension HomePageViewController: UICollectionViewDataSource, UICollectionViewDe
         detailViewController.product = trendingProducts[indexPath.item]
         
         let navController = UINavigationController(rootViewController: detailViewController)
-        
         
         present(navController, animated: true){
             navController.navigationBar.isTranslucent = false

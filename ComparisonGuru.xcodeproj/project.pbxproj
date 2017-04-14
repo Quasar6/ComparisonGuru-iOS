@@ -52,6 +52,7 @@
 		3E979DB11E9AB509007BE7C6 /* UIVisualEffectViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E979DA71E9AB509007BE7C6 /* UIVisualEffectViewX.swift */; };
 		3E979DB81E9BD9A7007BE7C6 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E979DB71E9BD9A7007BE7C6 /* ChartViewController.swift */; };
 		3E979DBC1E9BFD70007BE7C6 /* TrendingChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E979DBB1E9BFD70007BE7C6 /* TrendingChartViewController.swift */; };
+		3EF0E8401EA10CBD0093B25E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF0E83F1EA10CBD0093B25E /* LoginViewController.swift */; };
 		EC13A482C25DB6636AAAA9E0 /* Pods_ComparisonGuru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 963BD7117DA808BDE5DBB676 /* Pods_ComparisonGuru.framework */; };
 /* End PBXBuildFile section */
 
@@ -116,6 +117,7 @@
 		3E979DA71E9AB509007BE7C6 /* UIVisualEffectViewX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIVisualEffectViewX.swift; sourceTree = "<group>"; };
 		3E979DB71E9BD9A7007BE7C6 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		3E979DBB1E9BFD70007BE7C6 /* TrendingChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingChartViewController.swift; sourceTree = "<group>"; };
+		3EF0E83F1EA10CBD0093B25E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		41DDADA871EA03298DA23125 /* Pods-ComparisonGuruTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComparisonGuruTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ComparisonGuruTests/Pods-ComparisonGuruTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A377C1F11B01470BDA12AAA /* Pods-ComparisonGuru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ComparisonGuru.release.xcconfig"; path = "Pods/Target Support Files/Pods-ComparisonGuru/Pods-ComparisonGuru.release.xcconfig"; sourceTree = "<group>"; };
 		963BD7117DA808BDE5DBB676 /* Pods_ComparisonGuru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ComparisonGuru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +237,7 @@
 		3E40673F1E719714004C8EEB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3EF0E83F1EA10CBD0093B25E /* LoginViewController.swift */,
 				3E979D541E968033007BE7C6 /* InitialPage */,
 				3E2D9D101E7AF95700899B30 /* DetailViewController */,
 				3E36111A1E8B096A00B4EAD8 /* HomePage */,
@@ -576,6 +579,7 @@
 				3E4A4F1F1E76F643005F5B9D /* MenuCell.swift in Sources */,
 				3E979DAD1E9AB509007BE7C6 /* UIViewAnchorPoint.swift in Sources */,
 				3E4A4F161E73C53F005F5B9D /* Service.swift in Sources */,
+				3EF0E8401EA10CBD0093B25E /* LoginViewController.swift in Sources */,
 				3E979DAC1E9AB509007BE7C6 /* UITextFieldX.swift in Sources */,
 				3E40673D1E712231004C8EEB /* Extensions.swift in Sources */,
 				3E979D4D1E9416FA007BE7C6 /* ReviewTableCell.swift in Sources */,

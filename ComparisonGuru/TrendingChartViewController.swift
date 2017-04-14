@@ -28,7 +28,7 @@ class TrendingChartViewController: UIViewController {
                 let dataEntry = ChartDataEntry(x: Double(i), y: trends[i].price)
                 dataEntries.append(dataEntry)
                 //TODO: check the year assign it to different dataset
-                let year = converToYearFormat(date: trends[i].date)
+//                let year = converToYearFormat(date: trends[i].date)
                 dateValue.append(convertDateFormater(date: trends[i].date))
             }
             

@@ -44,6 +44,21 @@ class ResultListCell: UITableViewCell {
         return label
     }()
     
+    var product:Product! {
+        didSet{
+            updateCell()
+        }
+    }
+    
+    private func updateCell() {
+        productImageView.loadImageUsingUrlString(urlString: product.imageUrl)
+        productName.text = product.name
+        let price = product.salePrice == 0 ? product.price : product.salePrice
+        priceLabel.text = "\(product.currency)  \(price)"
+        let storeName = product.store
+        storeImage.image = Helper.getStoreImageFromName(store: storeName)
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()

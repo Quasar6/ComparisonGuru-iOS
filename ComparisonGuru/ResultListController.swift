@@ -60,20 +60,7 @@ class ResultListController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ResultListCell
-
-        let product = products[indexPath.row]
-        cell.productImageView.loadImageUsingUrlString(urlString: product.imageUrl)
-        
-        cell.productName.text = product.name
-        
-        var price = products[indexPath.row].price
-        if price == 0 {
-            price = products[indexPath.row].salePrice
-        }
-            cell.priceLabel.text = "\(product.currency)  \(price)"
-        
-        let storeName = products[indexPath.row].store
-        cell.storeImage.image = Helper.getStoreImageFromName(store: storeName)
+        cell.product = products[indexPath.row]
         
         return cell
     }

@@ -23,6 +23,8 @@ class ReviewViewController: UIViewController, UITableViewDataSource,UITableViewD
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var countLabel: UILabel!
     
+    @IBOutlet var loginView: UIView!
+    
     @IBOutlet weak var commentPanelBottomConstrain: NSLayoutConstraint!
     
     let countLimit = 140
@@ -73,9 +75,7 @@ class ReviewViewController: UIViewController, UITableViewDataSource,UITableViewD
     }
     
     func sendComment(){
-        
-        if let user = FIRAuth.auth()?.currentUser {
-            
+        guard let user = FIRAuth.auth()?.currentUser else {return}
             let json:JSON = [
                 "productId": product.id,
                 "comment": textView.text,
@@ -92,14 +92,13 @@ class ReviewViewController: UIViewController, UITableViewDataSource,UITableViewD
                 self.product = product?.product
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.ratingControl.rating = 0
+                    self.textView.text = ""
                 }
             })
-        }
-        
-        
-        
-        
     }
+    
+    
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -128,7 +127,13 @@ extension ReviewViewController {
 // MARK: - Animations
 extension ReviewViewController {
     @IBAction func toggleButtonTouched(_ sender: UIButton) {
-        animateCommentPanel()
+        if let _ = FIRAuth.auth()?.currentUser {
+            animateCommentPanel()
+        } else {
+            let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            present(loginVC, animated: true, completion: nil)
+        }
+        
     }
     
     fileprivate func animateCommentPanel(){
