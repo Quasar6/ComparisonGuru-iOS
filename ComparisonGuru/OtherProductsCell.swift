@@ -21,16 +21,16 @@ class OtherProductsCell: UICollectionViewCell {
     let productTitleLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Google Pixel"
+//        lbl.text = "Google Pixel"
         lbl.font = .systemFont(ofSize: 10)
-        lbl.numberOfLines = 0
+        lbl.numberOfLines = 1
         return lbl
     }()
     
     let priceTagLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "CAD 399"
+//        lbl.text = "CAD 399"
         lbl.font = .boldSystemFont(ofSize: 11)
         
         return lbl
@@ -49,6 +49,7 @@ class OtherProductsCell: UICollectionViewCell {
         setupCellShadow()
         setupViews()
         backgroundColor = .white
+        self.clipsToBounds = true
     }
     
     fileprivate func setupCellShadow(){
@@ -64,6 +65,25 @@ class OtherProductsCell: UICollectionViewCell {
         self.layer.borderColor = UIColor(r: 183, g: 183, b: 183).cgColor
         self.layer.masksToBounds = true
         self.clipsToBounds = false
+        
+    }
+    
+    var product:Product!{
+        didSet{
+            updateData()
+        }
+    }
+    
+    fileprivate func updateData(){
+        productImageView.loadImageUsingUrlString(urlString: product.imageUrl)
+        productTitleLabel.text = product.name
+        if product.salePrice == 0{
+            priceTagLabel.text = "\(product.price)"
+        } else {
+            priceTagLabel.text = "\(product.salePrice)"
+        }
+        
+        storeImageView.image = Helper.getStoreImageFromName(store: product.store)
         
     }
     

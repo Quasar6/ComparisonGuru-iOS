@@ -16,6 +16,11 @@ class DetailViewController: UIViewController {
             subDetailPageViewController.product = product
         }
     }
+    var trendingProducts:[Product]?{
+        didSet{
+            subDetailPageViewController.trendingProducts = trendingProducts
+        }
+    }
     
     lazy var subDetailPageViewController: SubDetailPageViewController = {
         let vc = SubDetailPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
@@ -66,6 +71,7 @@ class DetailViewController: UIViewController {
         setupSubviews()
         
         view.backgroundColor = .white
+        
         
     }
     

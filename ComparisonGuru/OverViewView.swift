@@ -89,6 +89,7 @@ class OverViewView: UIView {
         }
     }
     
+    
     private func updateProduct() {
         guard let product = self.product else {return}
         productNameLabel.text = product.name
@@ -96,6 +97,8 @@ class OverViewView: UIView {
         if price == 0 {
             price = product.price
             priceTagLabel.text = "\(product.currency) \(price)"
+        } else if product.price == 0 && product.salePrice != 0 {
+            priceTagLabel.text = "\(product.currency) \(product.salePrice)"
         } else {
             let attributedSalePriceTag = NSMutableAttributedString(string: "\(product.currency) \(product.salePrice)\t")
             attributedSalePriceTag.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(0, attributedSalePriceTag.length))

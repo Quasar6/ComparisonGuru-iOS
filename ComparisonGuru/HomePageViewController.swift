@@ -40,7 +40,7 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var topLogInView: UIView!
     
     // MARK: - Variables or Constants
-    fileprivate var trendingProducts = [Product]()
+    var trendingProducts = [Product]()
     fileprivate let cellId = "homePageCell"
     
     lazy var loadingView: LoadingView = {
@@ -237,6 +237,7 @@ class HomePageViewController: UIViewController {
             let resultController = ResultListController()
             guard let products = homeDatasource?.products else {return}
             resultController.products = products
+            resultController.trendingProducts = self.trendingProducts
             let navController = UINavigationController(rootViewController: resultController)
             navController.setupBarColor()
             navController.navigationBar.isTranslucent = false
@@ -294,7 +295,7 @@ extension HomePageViewController: UICollectionViewDataSource, UICollectionViewDe
         print("you did selected \(indexPath.item) item")
         let detailViewController = DetailViewController()
         detailViewController.product = trendingProducts[indexPath.item]
-        
+        detailViewController.trendingProducts = trendingProducts
         let navController = UINavigationController(rootViewController: detailViewController)
         navController.setupBarColor()
         present(navController, animated: true){

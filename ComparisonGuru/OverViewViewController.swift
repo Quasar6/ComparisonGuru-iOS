@@ -19,6 +19,7 @@ class OverViewViewController: UIViewController {
             
         }
     }
+    var trendingProducts:[Product]?
     
     var collectionView:UICollectionView!
     
@@ -51,12 +52,14 @@ class OverViewViewController: UIViewController {
 extension OverViewViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return trendingProducts?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! OtherProductsCell
+        if let trendingProducts = trendingProducts {
+            cell.product = trendingProducts[indexPath.item]
+        }
         return cell
     }
     

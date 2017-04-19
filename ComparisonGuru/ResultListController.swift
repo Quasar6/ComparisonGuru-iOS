@@ -12,6 +12,7 @@ import SwiftyJSON
 class ResultListController: UITableViewController {
     let cellId = "resultListCell"
     var products = [Product]()
+    var trendingProducts:[Product]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,9 @@ class ResultListController: UITableViewController {
         
             var product = products[indexPath.row]
             detailViewController.product = product
+            if let trendingProducts = trendingProducts {
+                detailViewController.trendingProducts = trendingProducts
+            }
         
         //prevent constantly update one product by multiple clicks
         if !product.triggeredHit {

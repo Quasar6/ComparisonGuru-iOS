@@ -18,13 +18,22 @@ class SubDetailPageViewController: UIPageViewController {
         }
     }
     
+    var trendingProducts:[Product]?{
+        didSet{
+            passTrendingProducts()
+        }
+    }
+    
     private func passProduct(){
-        myView.product = self.product
+        overViewController.product = self.product
         reviewViewController.product = self.product
         trendingChartViewController.product = self.product
     }
+    private func passTrendingProducts(){
+        overViewController.trendingProducts = self.trendingProducts
+    }
     
-    let myView:OverViewViewController = {
+    let overViewController:OverViewViewController = {
         let view = OverViewViewController()
         return view
     }()
@@ -41,7 +50,7 @@ class SubDetailPageViewController: UIPageViewController {
     }()
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [self.myView, self.trendingChartViewController, self.reviewViewController]
+        return [self.overViewController, self.trendingChartViewController, self.reviewViewController]
     }()
     
     override func viewDidLoad() {
