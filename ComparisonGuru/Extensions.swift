@@ -139,3 +139,11 @@ extension UIView {
     }
 }
 
+extension UINavigationController {
+    func setupBarColor(){
+        self.navigationBar.barTintColor = Color.menuBarTintColor
+        self.navigationBar.tintColor = .white
+        self.navigationBar.barStyle = .black
+    }
+}
+

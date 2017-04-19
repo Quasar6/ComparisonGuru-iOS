@@ -29,7 +29,7 @@ class ResultListController: UITableViewController {
     }
 
     private func setupNavItems(){
-        let leftButton = UIBarButtonItem(title: "Home", style: .plain, target: self, action: #selector(handleLeftNavButtonClicked))
+        let leftButton = UIBarButtonItem(title: " Home", style: .plain, target: self, action: #selector(handleLeftNavButtonClicked))
         navigationItem.leftBarButtonItem = leftButton
     }
     

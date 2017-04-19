@@ -21,7 +21,7 @@ class MenuBarView: UIView {
     }()
     
     let cellId = "menuCellId"
-    let titles = ["OVERVIEW", "SPECS", "REVIEWS"]
+    let titles = ["OVERVIEW", "TRENDING", "REVIEWS"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)

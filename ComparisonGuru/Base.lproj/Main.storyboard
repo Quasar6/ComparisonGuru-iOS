@@ -127,6 +127,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="9Tc-ow-wUr" firstAttribute="leading" secondItem="dWI-3n-1yr" secondAttribute="leading" constant="16" id="03B-6N-1dj"/>
                                     <constraint firstAttribute="bottom" secondItem="X6N-DU-OHR" secondAttribute="bottom" constant="72" id="6DG-9N-ee6"/>
@@ -140,6 +141,9 @@
                                     <constraint firstItem="t1K-D1-KAV" firstAttribute="centerX" secondItem="dWI-3n-1yr" secondAttribute="centerX" id="oip-mn-S6B"/>
                                     <constraint firstItem="7Ma-2F-JXf" firstAttribute="top" secondItem="t1K-D1-KAV" secondAttribute="bottom" constant="16" id="p9s-pF-1BZ"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="OQg-Lo-qTC" id="Scs-aM-uGJ"/>
+                                </connections>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4ZL-9F-wcu">
                                 <rect key="frame" x="-255" y="20" width="255" height="35"/>
@@ -198,7 +202,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="FW0-qN-u9L" firstAttribute="centerY" secondItem="MOj-16-gTF" secondAttribute="centerY" id="0a4-kF-Kbv"/>
                                     <constraint firstItem="a52-ua-Bn3" firstAttribute="leading" secondItem="FW0-qN-u9L" secondAttribute="trailing" constant="8" id="7D8-AE-78D"/>
@@ -238,10 +242,12 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="X6N-DU-OHR" id="AK4-Xx-mma"/>
+                        <outlet property="outerScrollView" destination="dWI-3n-1yr" id="S2i-B7-fph"/>
                         <outlet property="searchField" destination="7Ma-2F-JXf" id="egA-XT-2fM"/>
                         <outlet property="signOutBackgroundView" destination="Xai-nk-cF9" id="b4E-ne-H2N"/>
                         <outlet property="signOutButton" destination="23p-hC-6Tq" id="pm8-1n-kjx"/>
                         <outlet property="signOutButtonTopConstrain" destination="CGU-SL-216" id="3Ib-IJ-BIM"/>
+                        <outlet property="topLogInView" destination="MOj-16-gTF" id="fqU-eA-cbm"/>
                         <outlet property="topUserInfoView" destination="4ZL-9F-wcu" id="qBf-tw-NIW"/>
                         <outlet property="topUserInfoViewLeftConstrain" destination="WkZ-q0-kC3" id="atN-TD-YCc"/>
                         <outlet property="topUserSignInButtonLeftConstrain" destination="DAE-Kk-2ah" id="bVM-Ji-hzJ"/>
@@ -425,7 +431,6 @@
                                 <state key="normal" title="Dismiss"/>
                                 <connections>
                                     <action selector="dismissDidTap" destination="9sM-PZ-wc3" eventType="touchUpInside" id="6PL-LW-8ay"/>
-                                    <action selector="loginViewDismissButtonTouched:" destination="OQg-Lo-qTC" eventType="touchUpInside" id="ZWS-gL-I6N"/>
                                 </connections>
                             </button>
                         </subviews>

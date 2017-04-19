@@ -17,6 +17,17 @@ class HomePageViewController: UIViewController {
         static let toSpeechRecognitionVC = "toSpeechRecognition"
         static let toLoginViewController = "toLoginViewController"
     }
+    
+    enum ScrollDirection {
+        case Up,Down
+    }
+    var lastContentOffset:CGFloat = 0 //use to detect scroll direction
+    
+    var scrollDirection:ScrollDirection! {
+        didSet{
+            
+        }
+    }
     // MARK: - Outlets
     @IBOutlet weak var topUserInfoView: UIView!
     @IBOutlet weak var userImage: UIImageView!
@@ -25,6 +36,8 @@ class HomePageViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var trendingTitleLabel: UILabel!
     
+    @IBOutlet weak var outerScrollView: UIScrollView!
+    @IBOutlet weak var topLogInView: UIView!
     
     // MARK: - Variables or Constants
     fileprivate var trendingProducts = [Product]()
@@ -225,6 +238,7 @@ class HomePageViewController: UIViewController {
             guard let products = homeDatasource?.products else {return}
             resultController.products = products
             let navController = UINavigationController(rootViewController: resultController)
+            navController.setupBarColor()
             navController.navigationBar.isTranslucent = false
             self.present(navController, animated: true)
         }
@@ -282,7 +296,7 @@ extension HomePageViewController: UICollectionViewDataSource, UICollectionViewDe
         detailViewController.product = trendingProducts[indexPath.item]
         
         let navController = UINavigationController(rootViewController: detailViewController)
-        
+        navController.setupBarColor()
         present(navController, animated: true){
             navController.navigationBar.isTranslucent = false
             let leftButton = UIBarButtonItem(title: " Home", style: .plain, target: detailViewController, action: #selector(detailViewController.handleDismiss))
@@ -306,5 +320,28 @@ extension HomePageViewController: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         searchField.endEditing(true)
+    }
+}
+
+// MARK: - determine scroll direction
+extension HomePageViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == outerScrollView{
+            let yVelocity = scrollView.panGestureRecognizer.velocity(in: scrollView).y
+            if yVelocity < 0 {
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+                    self.topLogInView.transform = CGAffineTransform(translationX: 0, y: -60)
+                    self.topUserInfoView.transform = CGAffineTransform(translationX: 0, y: -60)
+                    self.view.layoutIfNeeded()
+                })
+                
+            } else if yVelocity > 0{
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
+                    self.topLogInView.transform = CGAffineTransform.identity
+                    self.topUserInfoView.transform = CGAffineTransform.identity
+                    self.view.layoutIfNeeded()
+                })
+            }
+        }
     }
 }
