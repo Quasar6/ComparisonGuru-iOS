@@ -52,7 +52,7 @@ class HomePageViewController: UIViewController {
     
     lazy var micButton: UIButton = {
         let button = UIButton(type: UIButtonType.system)
-        button.setImage(#imageLiteral(resourceName: "ic_mic_black").withRenderingMode(.alwaysTemplate), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "mic-1"), for: .normal)
         button.tintColor = Color.searchFieldBorderColor
         button.imageView?.contentMode = .scaleAspectFit
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)

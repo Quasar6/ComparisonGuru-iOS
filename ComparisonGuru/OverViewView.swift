@@ -95,8 +95,16 @@ class OverViewView: UIView {
         var price = product.salePrice
         if price == 0 {
             price = product.price
+            priceTagLabel.text = "\(product.currency) \(price)"
+        } else {
+            let attributedSalePriceTag = NSMutableAttributedString(string: "\(product.currency) \(product.salePrice)\t")
+            attributedSalePriceTag.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: NSMakeRange(0, attributedSalePriceTag.length))
+            let attributedPriceTag = NSMutableAttributedString(string:  "\(product.price)")
+            attributedPriceTag.addAttribute(NSStrikethroughStyleAttributeName, value: 2, range: NSMakeRange(0,attributedPriceTag.length))
+            attributedSalePriceTag.append(attributedPriceTag)
+            priceTagLabel.attributedText = attributedSalePriceTag
         }
-        priceTagLabel.text = "\(product.currency) \(price)"
+        
         imageView.loadImageUsingUrlString(urlString: product.imageUrl)
     }
     
